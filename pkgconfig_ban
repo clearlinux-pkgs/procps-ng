@@ -3,4 +3,3 @@
 # undesirable. One name per line, no whitespace.
 #
 libsystemd-login
-AC_DEFINE(WITH_SYSTEMD
