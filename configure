@@ -1,1 +1,1 @@
---exec-prefix=/ --enable-watch8bit
+--exec-prefix=/ --enable-watch8bit --with-systemd

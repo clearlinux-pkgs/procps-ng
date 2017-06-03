@@ -4,7 +4,7 @@
 #
 Name     : procps-ng
 Version  : 3.3.12
-Release  : 31
+Release  : 32
 URL      : http://downloads.sourceforge.net/procps-ng/procps-ng-3.3.12.tar.xz
 Source0  : http://downloads.sourceforge.net/procps-ng/procps-ng-3.3.12.tar.xz
 Summary  : Library to control and query process state
@@ -56,6 +56,14 @@ Group: Documentation
 doc components for the procps-ng package.
 
 
+%package extras
+Summary: extras components for the procps-ng package.
+Group: Default
+
+%description extras
+extras components for the procps-ng package.
+
+
 %package lib
 Summary: lib components for the procps-ng package.
 Group: Libraries
@@ -77,22 +85,27 @@ locales components for the procps-ng package.
 %patch1 -p1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export CFLAGS="$CFLAGS -Os -ffunction-sections "
-export FCFLAGS="$CFLAGS -Os -ffunction-sections "
-export FFLAGS="$CFLAGS -Os -ffunction-sections "
-export CXXFLAGS="$CXXFLAGS -Os -ffunction-sections "
-%configure --disable-static --exec-prefix=/ --enable-watch8bit
+export SOURCE_DATE_EPOCH=1496502284
+export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+%configure --disable-static --exec-prefix=/ --enable-watch8bit --with-systemd
 make V=1  %{?_smp_mflags}
 
 %check
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check ||:
 
 %install
+export SOURCE_DATE_EPOCH=1496502284
 rm -rf %{buildroot}
 %make_install
 %find_lang procps-ng
@@ -105,6 +118,7 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 
 %files bin
 %defattr(-,root,root,-)
+%exclude /usr/bin/slabtop
 %exclude /usr/bin/uptime
 /usr/bin/free
 /usr/bin/kill
@@ -114,7 +128,6 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 /usr/bin/pmap
 /usr/bin/ps
 /usr/bin/pwdx
-/usr/bin/slabtop
 /usr/bin/sysctl
 /usr/bin/tload
 /usr/bin/top2
@@ -136,22 +149,27 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 /usr/include/proc/version.h
 /usr/include/proc/wchan.h
 /usr/include/proc/whattime.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libprocps.so
+/usr/lib64/pkgconfig/libprocps.pc
 
 %files doc
 %defattr(-,root,root,-)
-%doc /usr/share/doc/procps-ng/*
+%doc /usr/share/doc/procps\-ng/*
 %doc /usr/share/man/man1/*
 %doc /usr/share/man/man3/*
 %doc /usr/share/man/man5/*
 %doc /usr/share/man/man8/*
 %exclude /usr/share/man/man1/uptime.1
 
+%files extras
+%defattr(-,root,root,-)
+/usr/bin/slabtop
+
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libprocps.so.6
+/usr/lib64/libprocps.so.6.0.0
 
-%files locales -f procps-ng.lang 
+%files locales -f procps-ng.lang
 %defattr(-,root,root,-)
 
