@@ -1,0 +1,1 @@
+Configure miss: if gcc -std=gnu99 static flag -static works

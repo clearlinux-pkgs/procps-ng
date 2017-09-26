@@ -4,7 +4,7 @@
 #
 Name     : procps-ng
 Version  : 3.3.12
-Release  : 35
+Release  : 36
 URL      : http://downloads.sourceforge.net/procps-ng/procps-ng-3.3.12.tar.xz
 Source0  : http://downloads.sourceforge.net/procps-ng/procps-ng-3.3.12.tar.xz
 Summary  : Library to control and query process state
@@ -31,6 +31,7 @@ BuildRequires : systemd-dev
 BuildRequires : tcl
 Patch1: 0001-watch-Use-real-ncurses-header.patch
 Patch2: tinfow.patch
+Patch3: break.patch
 
 %description
 How to use check suite
@@ -92,20 +93,21 @@ locales components for the procps-ng package.
 %setup -q -n procps-ng-3.3.12
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1496509413
+export SOURCE_DATE_EPOCH=1506458155
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
+export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
 %reconfigure --disable-static --exec-prefix=/ --enable-watch8bit --with-systemd
 make V=1  %{?_smp_mflags}
 
@@ -117,7 +119,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check ||:
 
 %install
-export SOURCE_DATE_EPOCH=1496509413
+export SOURCE_DATE_EPOCH=1506458155
 rm -rf %{buildroot}
 %make_install
 %find_lang procps-ng
