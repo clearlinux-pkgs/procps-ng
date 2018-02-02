@@ -4,7 +4,7 @@
 #
 Name     : procps-ng
 Version  : 3.3.12
-Release  : 37
+Release  : 38
 URL      : http://downloads.sourceforge.net/procps-ng/procps-ng-3.3.12.tar.xz
 Source0  : http://downloads.sourceforge.net/procps-ng/procps-ng-3.3.12.tar.xz
 Summary  : Library to control and query process state
