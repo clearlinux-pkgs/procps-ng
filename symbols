@@ -21,6 +21,8 @@ libprocps.so.6:loadavg
 libprocps.so.6:look_up_our_self
 libprocps.so.6:lookup_wchan
 libprocps.so.6:meminfo
+libprocps.so.6:numa_init
+libprocps.so.6:numa_uninit
 libprocps.so.6:openproc
 libprocps.so.6:pretty_print_signals
 libprocps.so.6:print_uptime
