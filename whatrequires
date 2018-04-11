@@ -45,6 +45,7 @@ R-bridgesampling
 R-brms
 R-broom
 R-car
+R-carData
 R-caret
 R-chron
 R-circlize
@@ -220,6 +221,7 @@ colord
 colord-gtk
 comedilib
 compat-gegl
+compat-gtksourceview-soname3
 compat-guile-soname20
 compat-libpng-soname12
 compat-llvm-soname4
@@ -388,6 +390,7 @@ hamlib
 harfbuzz
 hexchat
 hub
+hugo
 hunspell
 hwloc
 hyperscan
@@ -439,6 +442,7 @@ libconfig
 libcroco
 libcryptui
 libdatrie
+libdazzle
 libdnf
 libdrm
 libepoxy
@@ -565,12 +569,14 @@ openvswitch
 opus
 opusfile
 orc
+orca
 ostree
 p7zip
 pandas
 pango
 parameter-framework
 parted
+patch
 patchutils
 pavucontrol
 pciutils
@@ -607,6 +613,7 @@ recordproto
 requests
 rest
 rpm
+rr
 ruby
 runc
 rustc
@@ -663,12 +670,14 @@ usermode
 util-linux
 uwsgi
 v4l-utils
+vala
 vinagre
 vino
 virt-manager
 virt-viewer
 vlc
 volume_key
+vorbis-tools
 vte
 vulkan-sdk
 wayland
@@ -685,6 +694,7 @@ xcb-util-image
 xcb-util-keysyms
 xcb-util-wm
 xcmiscproto
+xdg-desktop-portal
 xdg-user-dirs
 xdg-user-dirs-gtk
 xdg-utils

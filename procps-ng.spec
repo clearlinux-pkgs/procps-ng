@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x022166C0FF3C84E3 (csmall@debian.org)
 #
 Name     : procps-ng
-Version  : 3.3.13
-Release  : 39
-URL      : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.13.tar.xz
-Source0  : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.13.tar.xz
-Source99 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.13.tar.xz.asc
+Version  : 3.3.14
+Release  : 40
+URL      : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz
+Source0  : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz
+Source99 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz.asc
 Summary  : Library to control and query process state
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+ GPL-3.0+ LGPL-2.0 LGPL-2.0+
@@ -84,7 +84,7 @@ locales components for the procps-ng package.
 
 
 %prep
-%setup -q -n procps-ng-3.3.13
+%setup -q -n procps-ng-3.3.14
 %patch1 -p1
 
 %build
@@ -92,7 +92,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1523020188
+export SOURCE_DATE_EPOCH=1523464379
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
@@ -108,7 +108,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check ||:
 
 %install
-export SOURCE_DATE_EPOCH=1523020188
+export SOURCE_DATE_EPOCH=1523464379
 rm -rf %{buildroot}
 %make_install
 %find_lang procps-ng
