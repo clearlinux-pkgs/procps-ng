@@ -6,7 +6,7 @@
 #
 Name     : procps-ng
 Version  : 3.3.14
-Release  : 40
+Release  : 41
 URL      : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz
 Source0  : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz
 Source99 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz.asc
