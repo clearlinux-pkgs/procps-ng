@@ -5,18 +5,18 @@
 # Source0 file verified with key 0x022166C0FF3C84E3 (csmall@debian.org)
 #
 Name     : procps-ng
-Version  : 3.3.14
-Release  : 41
-URL      : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz
-Source0  : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz
-Source99 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.14.tar.xz.asc
+Version  : 3.3.15
+Release  : 42
+URL      : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
+Source0  : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
+Source99 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz.asc
 Summary  : Library to control and query process state
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+ GPL-3.0+ LGPL-2.0 LGPL-2.0+
 Requires: procps-ng-bin
 Requires: procps-ng-lib
-Requires: procps-ng-doc
 Requires: procps-ng-locales
+Requires: procps-ng-man
 BuildRequires : dejagnu
 BuildRequires : expect
 BuildRequires : ncurses-dev
@@ -35,6 +35,7 @@ You need DejaGNU package.  Assuming you have it all you need to do is
 %package bin
 Summary: bin components for the procps-ng package.
 Group: Binaries
+Requires: procps-ng-man
 
 %description bin
 bin components for the procps-ng package.
@@ -54,6 +55,7 @@ dev components for the procps-ng package.
 %package doc
 Summary: doc components for the procps-ng package.
 Group: Documentation
+Requires: procps-ng-man
 
 %description doc
 doc components for the procps-ng package.
@@ -83,8 +85,16 @@ Group: Default
 locales components for the procps-ng package.
 
 
+%package man
+Summary: man components for the procps-ng package.
+Group: Default
+
+%description man
+man components for the procps-ng package.
+
+
 %prep
-%setup -q -n procps-ng-3.3.14
+%setup -q -n procps-ng-3.3.15
 %patch1 -p1
 
 %build
@@ -92,7 +102,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1523464379
+export SOURCE_DATE_EPOCH=1526919955
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
@@ -108,7 +118,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check ||:
 
 %install
-export SOURCE_DATE_EPOCH=1523464379
+export SOURCE_DATE_EPOCH=1526919955
 rm -rf %{buildroot}
 %make_install
 %find_lang procps-ng
@@ -159,11 +169,6 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 %files doc
 %defattr(-,root,root,-)
 %doc /usr/share/doc/procps\-ng/*
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man3/*
-%doc /usr/share/man/man5/*
-%doc /usr/share/man/man8/*
-%exclude /usr/share/man/man1/uptime.1
 
 %files extras
 %defattr(-,root,root,-)
@@ -171,8 +176,32 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libprocps.so.6
-/usr/lib64/libprocps.so.6.1.0
+/usr/lib64/libprocps.so.7
+/usr/lib64/libprocps.so.7.1.0
+
+%files man
+%defattr(-,root,root,-)
+%exclude /usr/share/man/man1/uptime.1
+/usr/share/man/man1/free.1
+/usr/share/man/man1/kill.1
+/usr/share/man/man1/pgrep.1
+/usr/share/man/man1/pidof.1
+/usr/share/man/man1/pkill.1
+/usr/share/man/man1/pmap.1
+/usr/share/man/man1/procps.1
+/usr/share/man/man1/ps.1
+/usr/share/man/man1/pwdx.1
+/usr/share/man/man1/slabtop.1
+/usr/share/man/man1/tload.1
+/usr/share/man/man1/top.1
+/usr/share/man/man1/w.1
+/usr/share/man/man1/watch.1
+/usr/share/man/man3/openproc.3
+/usr/share/man/man3/readproc.3
+/usr/share/man/man3/readproctab.3
+/usr/share/man/man5/sysctl.conf.5
+/usr/share/man/man8/sysctl.8
+/usr/share/man/man8/vmstat.8
 
 %files locales -f procps-ng.lang
 %defattr(-,root,root,-)
