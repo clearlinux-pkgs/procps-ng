@@ -6,17 +6,18 @@
 #
 Name     : procps-ng
 Version  : 3.3.15
-Release  : 42
+Release  : 43
 URL      : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
 Source0  : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
 Source99 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz.asc
 Summary  : Library to control and query process state
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+ GPL-3.0+ LGPL-2.0 LGPL-2.0+
-Requires: procps-ng-bin
-Requires: procps-ng-lib
-Requires: procps-ng-locales
-Requires: procps-ng-man
+Requires: procps-ng-bin = %{version}-%{release}
+Requires: procps-ng-lib = %{version}-%{release}
+Requires: procps-ng-license = %{version}-%{release}
+Requires: procps-ng-locales = %{version}-%{release}
+Requires: procps-ng-man = %{version}-%{release}
 BuildRequires : dejagnu
 BuildRequires : expect
 BuildRequires : ncurses-dev
@@ -35,7 +36,7 @@ You need DejaGNU package.  Assuming you have it all you need to do is
 %package bin
 Summary: bin components for the procps-ng package.
 Group: Binaries
-Requires: procps-ng-man
+Requires: procps-ng-license = %{version}-%{release}
 
 %description bin
 bin components for the procps-ng package.
@@ -44,9 +45,11 @@ bin components for the procps-ng package.
 %package dev
 Summary: dev components for the procps-ng package.
 Group: Development
-Requires: procps-ng-lib
-Requires: procps-ng-bin
-Provides: procps-ng-devel
+Requires: procps-ng-lib = %{version}-%{release}
+Requires: procps-ng-bin = %{version}-%{release}
+Requires: procps-ng-man = %{version}-%{release}
+Provides: procps-ng-devel = %{version}-%{release}
+Requires: procps-ng = %{version}-%{release}
 
 %description dev
 dev components for the procps-ng package.
@@ -55,7 +58,7 @@ dev components for the procps-ng package.
 %package doc
 Summary: doc components for the procps-ng package.
 Group: Documentation
-Requires: procps-ng-man
+Requires: procps-ng-man = %{version}-%{release}
 
 %description doc
 doc components for the procps-ng package.
@@ -72,9 +75,18 @@ extras components for the procps-ng package.
 %package lib
 Summary: lib components for the procps-ng package.
 Group: Libraries
+Requires: procps-ng-license = %{version}-%{release}
 
 %description lib
 lib components for the procps-ng package.
+
+
+%package license
+Summary: license components for the procps-ng package.
+Group: Default
+
+%description license
+license components for the procps-ng package.
 
 
 %package locales
@@ -102,7 +114,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526919955
+export SOURCE_DATE_EPOCH=1551150085
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
@@ -118,13 +130,16 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check ||:
 
 %install
-export SOURCE_DATE_EPOCH=1526919955
+export SOURCE_DATE_EPOCH=1551150085
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/procps-ng
+cp COPYING %{buildroot}/usr/share/package-licenses/procps-ng/COPYING
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/procps-ng/COPYING.LIB
 %make_install
 %find_lang procps-ng
-## make_install_append content
+## install_append content
 mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -165,9 +180,12 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 /usr/include/proc/whattime.h
 /usr/lib64/libprocps.so
 /usr/lib64/pkgconfig/libprocps.pc
+/usr/share/man/man3/openproc.3
+/usr/share/man/man3/readproc.3
+/usr/share/man/man3/readproctab.3
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/doc/procps\-ng/*
 
 %files extras
@@ -179,8 +197,13 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 /usr/lib64/libprocps.so.7
 /usr/lib64/libprocps.so.7.1.0
 
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/procps-ng/COPYING
+/usr/share/package-licenses/procps-ng/COPYING.LIB
+
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %exclude /usr/share/man/man1/uptime.1
 /usr/share/man/man1/free.1
 /usr/share/man/man1/kill.1
@@ -196,9 +219,6 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 /usr/share/man/man1/top.1
 /usr/share/man/man1/w.1
 /usr/share/man/man1/watch.1
-/usr/share/man/man3/openproc.3
-/usr/share/man/man3/readproc.3
-/usr/share/man/man3/readproctab.3
 /usr/share/man/man5/sysctl.conf.5
 /usr/share/man/man8/sysctl.8
 /usr/share/man/man8/vmstat.8
