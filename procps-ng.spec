@@ -6,10 +6,10 @@
 #
 Name     : procps-ng
 Version  : 3.3.15
-Release  : 43
+Release  : 44
 URL      : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
 Source0  : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
-Source99 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz.asc
+Source1 : https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz.asc
 Summary  : Library to control and query process state
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+ GPL-3.0+ LGPL-2.0 LGPL-2.0+
@@ -29,9 +29,7 @@ BuildRequires : tcl
 Patch1: break.patch
 
 %description
-How to use check suite
-----------------------
-You need DejaGNU package.  Assuming you have it all you need to do is
+No detailed description available
 
 %package bin
 Summary: bin components for the procps-ng package.
@@ -47,7 +45,6 @@ Summary: dev components for the procps-ng package.
 Group: Development
 Requires: procps-ng-lib = %{version}-%{release}
 Requires: procps-ng-bin = %{version}-%{release}
-Requires: procps-ng-man = %{version}-%{release}
 Provides: procps-ng-devel = %{version}-%{release}
 Requires: procps-ng = %{version}-%{release}
 
@@ -113,30 +110,34 @@ man components for the procps-ng package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1551150085
-export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564460324
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-lto -fno-semantic-interposition "
 %configure --disable-static --exec-prefix=/ --enable-watch8bit --with-systemd
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check ||:
 
 %install
-export SOURCE_DATE_EPOCH=1551150085
+export SOURCE_DATE_EPOCH=1564460324
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/procps-ng
 cp COPYING %{buildroot}/usr/share/package-licenses/procps-ng/COPYING
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/procps-ng/COPYING.LIB
 %make_install
 %find_lang procps-ng
+## Remove excluded files
+rm -f %{buildroot}/usr/bin/uptime
+rm -f %{buildroot}/usr/share/man/man1/uptime.1
 ## install_append content
 mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 ## install_append end
@@ -146,8 +147,6 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 
 %files bin
 %defattr(-,root,root,-)
-%exclude /usr/bin/slabtop
-%exclude /usr/bin/uptime
 /usr/bin/free
 /usr/bin/kill
 /usr/bin/pgrep
@@ -204,7 +203,6 @@ mv %{buildroot}/usr/bin/top %{buildroot}/usr/bin/top2
 
 %files man
 %defattr(0644,root,root,0755)
-%exclude /usr/share/man/man1/uptime.1
 /usr/share/man/man1/free.1
 /usr/share/man/man1/kill.1
 /usr/share/man/man1/pgrep.1
