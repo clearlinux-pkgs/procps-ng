@@ -1,5 +1,5 @@
 PKG_NAME := procps-ng
-URL = https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
+URL = https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v3.3.16.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
