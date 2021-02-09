@@ -1,13 +1,14 @@
 # This file contains recursive sources that require this package
 e2fsprogs
-elasticsearch
 elfutils
 gcc
 gcc7
 gcc8
+gcc9
 gdb
 libstoragemgmt
 mingw-gcc
+modules
 nagios-plugins
 net-snmp
 nrpe
