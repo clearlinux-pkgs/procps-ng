@@ -1,5 +1,4 @@
 libc.so.6
-libdl.so.2
 libncursesw.so.6
 libsystemd.so.0
 libtinfo.so.6
