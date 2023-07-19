@@ -1,0 +1,25 @@
+From 1a58c911ebf86c725d8952c0ae60333d93795af1 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Wed, 19 Jul 2023 10:36:28 -0700
+Subject: [PATCH 2/2] Fix ncurses inclue dir
+
+---
+ src/watch.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/watch.c b/src/watch.c
+index cb2e299..01d96c6 100644
+--- a/src/watch.c
++++ b/src/watch.c
+@@ -53,7 +53,7 @@
+ # define _XOPEN_SOURCE_EXTENDED 1
+ # include <wchar.h>
+ # include <wctype.h>
+-# include <ncursesw/ncurses.h>
++# include <ncurses.h>
+ #else
+ # include <ncurses.h>
+ #endif	/* WITH_WATCH8BIT */
+-- 
+2.41.0
+

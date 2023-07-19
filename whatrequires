@@ -1,8 +1,10 @@
 # This file contains recursive sources that require this package
+bats
 compat-gcc-10
 e2fsprogs
 elfutils
 gcc
+gcc11
 gcc7
 gcc8
 gcc9
@@ -13,9 +15,10 @@ modules
 nagios-plugins
 net-snmp
 nrpe
-psutil
+pypi-psutil
 redis-native
 stunnel
 tcl
 texinfo
 util-linux
+valgrind
