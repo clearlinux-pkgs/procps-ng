@@ -1,0 +1,80 @@
+From 5d5d863968dc871c75362808eacce15229673631 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Thu, 20 Jul 2023 00:17:57 -0700
+Subject: [PATCH] Hack to avoid msgstr error
+
+---
+ po/fr.po | 50 +-------------------------------------------------
+ 1 file changed, 1 insertion(+), 49 deletions(-)
+
+diff --git a/po/fr.po b/po/fr.po
+index f014990..d59ba6c 100644
+--- a/po/fr.po
++++ b/po/fr.po
+@@ -3284,54 +3284,6 @@ msgstr "l'enregistrement empêche un ancien top de le lire, enregistrer malgré
+ #. .    last line (the one without the newline). So please avoid any line
+ #. .    wraps that could place them there.
+ #. .
+-#: top/top_nls.c:551
+-#, c-format
+-msgid ""
+-"Help for Interactive Commands~2 - %s\n"
+-"Window ~1%s~6: ~1Cumulative mode ~3%s~2.  ~1System~6: ~1Delay ~3%.1f secs~2; ~1Secure mode ~3%s~2.\n"
+-"\n"
+-"  Z~5,~1B~5,E,e   Global: '~1Z~2' colors; '~1B~2' bold; '~1E~2'/'~1e~2' summary/task memory scale\n"
+-"  l,t,m,I   Toggle: '~1l~2' load avg; '~1t~2' task/cpu; '~1m~2' memory; '~1I~2' Irix mode\n"
+-"  0,1,2,3,4 Toggle: '~10~2' zeros; '~11~2/~12~2/~13~2' cpu/numa views; '~14~2' cpus two abreast\n"
+-"  f,F,X     Fields: '~1f~2'/'~1F~2' add/remove/order/sort; '~1X~2' increase fixed-width\n"
+-"\n"
+-"  L,&,<,> . Locate: '~1L~2'/'~1&~2' find/again; Move sort column: '~1<~2'/'~1>~2' left/right\n"
+-"  R,H,J,C . Toggle: '~1R~2' Sort; '~1H~2' Threads; '~1J~2' Num justify; '~1C~2' Coordinates\n"
+-"  c,i,S,j . Toggle: '~1c~2' Cmd name/line; '~1i~2' Idle; '~1S~2' Time; '~1j~2' Str justify\n"
+-"  x~5,~1y~5     . Toggle highlights: '~1x~2' sort field; '~1y~2' running tasks\n"
+-"  z~5,~1b~5     . Toggle: '~1z~2' color/mono; '~1b~2' bold/reverse (only if 'x' or 'y')\n"
+-"  u,U,o,O . Filter by: '~1u~2'/'~1U~2' effective/any user; '~1o~2'/'~1O~2' other criteria\n"
+-"  n,#,^O  . Set: '~1n~2'/'~1#~2' max tasks displayed; Show: ~1Ctrl~2+'~1O~2' other filter(s)\n"
+-"  V,v     . Toggle: '~1V~2' forest view; '~1v~2' hide/show forest view children\n"
+-"\n"
+-"%s  W,Y,!     Write config file '~1W~2'; Inspect other output '~1Y~2'; Combine Cpus '~1!~2'\n"
+-"  q         Quit\n"
+-"          ( commands shown with '.' require a ~1visible~2 task display ~1window~2 ) \n"
+-"Press '~1h~2' or '~1?~2' for help with ~1Windows~2,\n"
+-"Type 'q' or <Esc> to continue "
+-msgstr ""
+-"Aide pour les commandes interactives~2 - %s\n"
+-"Fenêtre ~1%s~6: ~1Mode cumulatif ~3%s~2.  ~1Système~6: ~1Délai ~3%.1lf secs~2; ~1Mode sûr ~3%s~2.\n"
+-"\n"
+-"  Z~5,~1B~5,E,e   Global: «~1Z~2» couleurs; «~1B~2» gras; «~1E~2»/«~1e~2» résumé/échelle mem tâches\n"
+-"  l,t,m,I   Commuter: «~1l~2» charge moy; «~1t~2» stats tâche/cpu; «~1m~2» info mem; «~1I~2» Mode Irix\n"
+-"  0,1,2,3,4 Commuter: «~10~2» zéros; «~11~2/~12~2/~13~2» vues nœuds cpus ou numa; «~14~2» cpus par deux\n"
+-"  f,F,X     Champs: «~1f~2»/«~1F~2» ajouter/supprimer/ordre/tri; «~1X~2» augmenter largeur fixe\n"
+-"\n"
+-"  L,&,<,> . Identifier: «~1L~2»/«~1&~2» chercher/encore; Déplacer colonne tri: «~1<~2»/«~1>~2» gauche/droite\n"
+-"  R,H,J,C . Commuter: «~1R~2» Tri; «~1H~2» Threads; «~1J~2» Justifier nombre, «~1C~2» Coordonnées\n"
+-"  c,i,S,j . Commuter: «~1c~2» Nom/ligne com; «~1i~2» Repos; «~1S~2» Temps; «~1j~2» Justifier chaîne\n"
+-"  x~5,~1y~5     . Commuter mise en évidence: «~1x~2» champ de tri; «~1y~2» tâches en cours\n"
+-"  z~5,~1b~5     . Commuter: «~1z~2» couleur/mono; «~1b~2» gras/inverse (uniquement avec « x » ou « y »)\n"
+-"  u,U,o,O . Filtrer par: «~1u~2»/«~1U~2» utilisateur eff/tous; «~1o~2»/«~1O~2» autre critère\n"
+-"  n,#,^O  . Changer: «~1n~2»/«~1#~2» tâches max affichées; Montrer: ~1Ctrl~2+«~1O~2» autre(s) filtre(s)\n"
+-"  V,v     . Commuter: '~1V~2' vue forêt; '~1v~2' montrer/cacher les enfants dans la vue forêt\n"
+-"\n"
+-"%s  W,Y,!     Écrire le fichier de config «~1W~2»; Inspecter autre sortie «~1Y~2»; Combiner Cpus «~1!~2»\n"
+-"  q         Quitter\n"
+-"         ( commandes montrée avec « . » exigent une ~1fenêtre~2 ~1visible~2 d'affichage des tâches ) \n"
+-"Appuyez sur «~1h̃~2» ou «~1?~2» pour l'aide sur les ~1Fenêtres~2,\n"
+-"Appuyez sur « q » ou « ESC » pour continuer "
+ 
+ #: top/top_nls.c:576
+ #, c-format
+@@ -4066,7 +4018,7 @@ msgstr " -v, --version  affiche les informations de version et sort\n"
+ #: watch.c:476
+ #, c-format
+ msgid "Every %.1fs: "
+-msgstr "Toutes les %.1lfs: "
++msgstr "Toutes les %.1fs: "
+ 
+ #: watch.c:477
+ #, c-format
+-- 
+2.41.0
+

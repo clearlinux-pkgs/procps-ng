@@ -1,2 +1,1 @@
-0001-translation-hack.patch
-0002-Fix-ncurses-inclue-dir.patch
+0001-Hack-to-avoid-msgstr-error.patch
